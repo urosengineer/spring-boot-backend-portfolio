@@ -6,7 +6,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.event.EventListener;
 
-import jakarta.annotation.PostConstruct;  // Promenjeno sa javax na jakarta
+import jakarta.annotation.PostConstruct;
 import rs.nms.newsroom.server.config.storage.FileStorageProperties;
 
 import javax.sql.DataSource;
