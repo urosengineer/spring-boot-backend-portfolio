@@ -28,17 +28,17 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
         log.info("MOS TCP received message:\n{}", msg);
 
         if (!msg.contains("<mos>")) {
-            log.warn("Primljena poruka nije MOS XML.");
+            log.warn("Received message is not a MOS XML.");
             return;
         }
 
-        log.info("MOS XML detektovan.");
+        log.info("MOS XML detected.");
 
         Optional<String> roCreateBlock = MosXmlParser.extractRoCreate(msg);
         if (roCreateBlock.isPresent()) {
-            log.info("Detektovan roCreate blok.");
+            log.info("Detected roCreate block.");
             RoCreateMessage roCreate = MosXmlParser.parseRoCreate(roCreateBlock.get());
-            log.info("Parsiran roCreate:\nRO ID: {}\nSlug: {}\nMeta: {}",
+            log.info("Parsed roCreate:\nRO ID: {}\nSlug: {}\nMeta: {}",
                     roCreate.getRoID(), roCreate.getSlug(), roCreate.getMosExternalMeta());
 
             mosRoMessageService.saveFromRoCreate(roCreate);
@@ -50,9 +50,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
         Optional<String> roUpdateBlock = MosXmlParser.extractRoUpdate(msg);
         if (roUpdateBlock.isPresent()) {
-            log.info("Detektovan roUpdate blok.");
+            log.info("Detected roUpdate block.");
             RoUpdateMessage update = MosXmlParser.parseRoUpdate(roUpdateBlock.get());
-            log.info("Parsiran roUpdate:\nRO ID: {}\nNew Slug: {}\nNew Meta: {}",
+            log.info("Parsed roUpdate:\nRO ID: {}\nNew Slug: {}\nNew Meta: {}",
                     update.getRoID(), update.getNewSlug(), update.getNewMosExternalMeta());
 
             mosRoMessageService.updateFromRoUpdate(update);
@@ -64,9 +64,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
         Optional<String> roDeleteBlock = MosXmlParser.extractRoDelete(msg);
         if (roDeleteBlock.isPresent()) {
-            log.info("Detektovan roDelete blok.");
+            log.info("Detected roDelete block.");
             RoDeleteMessage roDelete = MosXmlParser.parseRoDelete(roDeleteBlock.get());
-            log.info("Parsiran roDelete: RO ID: {}", roDelete.getRoID());
+            log.info("Parsed roDelete: RO ID: {}", roDelete.getRoID());
 
             mosRoMessageService.deleteByRoId(roDelete.getRoID());
 
@@ -77,9 +77,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
         Optional<String> roReplaceBlock = MosXmlParser.extractRoReplace(msg);
         if (roReplaceBlock.isPresent()) {
-            log.info("Detektovan roReplace blok.");
+            log.info("Detected roReplace block.");
             RoReplaceMessage roReplace = MosXmlParser.parseRoReplace(roReplaceBlock.get());
-            log.info("Parsiran roReplace:\nRO ID: {}\nSlug: {}\nMeta: {}",
+            log.info("Parsed roReplace:\nRO ID: {}\nSlug: {}\nMeta: {}",
                     roReplace.getRoID(), roReplace.getSlug(), roReplace.getMosExternalMeta());
 
             mosRoMessageService.replaceFromRoReplace(roReplace);
@@ -91,9 +91,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
         Optional<String> roStoryInsertBlock = MosXmlParser.extractRoStoryInsert(msg);
         if (roStoryInsertBlock.isPresent()) {
-            log.info("Detektovan roStoryInsert blok.");
+            log.info("Detected roStoryInsert block.");
             RoStoryInsertMessage insert = MosXmlParser.parseRoStoryInsert(roStoryInsertBlock.get());
-            log.info("Parsiran roStoryInsert:\nRO ID: {}\nStory ID: {}\nSlug: {}",
+            log.info("Parsed roStoryInsert:\nRO ID: {}\nStory ID: {}\nSlug: {}",
                     insert.getRoID(), insert.getStoryID(), insert.getStorySlug());
 
             mosStoryMessageService.processRoStoryInsert(insert);
@@ -105,9 +105,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
         Optional<String> roStoryReplaceBlock = MosXmlParser.extractRoStoryReplace(msg);
         if (roStoryReplaceBlock.isPresent()) {
-            log.info("Detektovan roStoryReplace blok.");
+            log.info("Detected roStoryReplace block.");
             RoStoryReplaceMessage replace = MosXmlParser.parseRoStoryReplace(roStoryReplaceBlock.get());
-            log.info("Parsiran roStoryReplace:\nRO ID: {}\nStory ID: {}\nSlug: {}",
+            log.info("Parsed roStoryReplace:\nRO ID: {}\nStory ID: {}\nSlug: {}",
                     replace.getRoID(), replace.getStoryID(), replace.getStorySlug());
 
             mosStoryMessageService.processRoStoryReplace(replace);
@@ -119,9 +119,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
         Optional<String> roStoryDeleteBlock = MosXmlParser.extractRoStoryDelete(msg);
         if (roStoryDeleteBlock.isPresent()) {
-            log.info("Detektovan roStoryDelete blok.");
+            log.info("Detected roStoryDelete block.");
             RoStoryDeleteMessage delete = MosXmlParser.parseRoStoryDelete(roStoryDeleteBlock.get());
-            log.info("Parsiran roStoryDelete:\nRO ID: {}\nStory ID: {}",
+            log.info("Parsed roStoryDelete:\nRO ID: {}\nStory ID: {}",
                     delete.getRoID(), delete.getStoryID());
 
             mosStoryMessageService.processRoStoryDelete(delete);
@@ -133,9 +133,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
         
         Optional<String> roStoryMoveBlock = MosXmlParser.extractRoStoryMove(msg);
         if (roStoryMoveBlock.isPresent()) {
-            log.info("Detektovan roStoryMove blok.");
+            log.info("Detected roStoryMove block.");
             RoStoryMoveMessage move = MosXmlParser.parseRoStoryMove(roStoryMoveBlock.get());
-            log.info("Parsiran roStoryMove:\nRO ID: {}\nStory ID: {}\nBefore: {}\nAfter: {}",
+            log.info("Parsed roStoryMove:\nRO ID: {}\nStory ID: {}\nBefore: {}\nAfter: {}",
                     move.getRoID(), move.getStoryID(), move.getStoryIDBefore(), move.getStoryIDAfter());
 
             mosStoryMessageService.processRoStoryMove(move);
@@ -147,9 +147,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
         
         Optional<String> roStorySwapBlock = MosXmlParser.extractRoStorySwap(msg);
         if (roStorySwapBlock.isPresent()) {
-            log.info("Detektovan roStorySwap blok.");
+            log.info("Detected roStorySwap block.");
             RoStorySwapMessage swap = MosXmlParser.parseRoStorySwap(roStorySwapBlock.get());
-            log.info("Parsiran roStorySwap:\nRO ID: {}\nStory1: {}\nStory2: {}",
+            log.info("Parsed roStorySwap:\nRO ID: {}\nStory1: {}\nStory2: {}",
                     swap.getRoID(), swap.getStoryID1(), swap.getStoryID2());
 
             mosStoryMessageService.processRoStorySwap(swap);
@@ -161,9 +161,9 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
         
         Optional<String> roStoryStatusBlock = MosXmlParser.extractRoStoryStatus(msg);
         if (roStoryStatusBlock.isPresent()) {
-            log.info("Detektovan roStoryStatus blok.");
+            log.info("Detected roStoryStatus block.");
             RoStoryStatusMessage statusMsg = MosXmlParser.parseRoStoryStatus(roStoryStatusBlock.get());
-            log.info("Parsiran roStoryStatus: RO ID: {}, Story ID: {}, Status: {}", 
+            log.info("Parsed roStoryStatus: RO ID: {}, Story ID: {}, Status: {}", 
                      statusMsg.getRoID(), statusMsg.getStoryID(), statusMsg.getStatus());
 
             mosStoryMessageService.processRoStoryStatus(statusMsg);
@@ -173,8 +173,7 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
             return;
         }
 
-
-        log.warn("Nepodržana ili neprepoznata MOS poruka.");
+        log.warn("Unsupported or unrecognized MOS message.");
     }
 
     @Override
@@ -185,11 +184,11 @@ public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        log.info("MOS TCP klijent povezan: {}", ctx.channel().remoteAddress());
+        log.info("MOS TCP client connected: {}", ctx.channel().remoteAddress());
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
-        log.info("MOS TCP klijent prekinuo vezu: {}", ctx.channel().remoteAddress());
+        log.info("MOS TCP client disconnected: {}", ctx.channel().remoteAddress());
     }
 }
