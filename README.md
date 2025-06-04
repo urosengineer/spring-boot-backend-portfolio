@@ -92,11 +92,11 @@ Below are example screenshots from the live API documentation:
 
 **User Management endpoints overview:**
 
-![Swagger User Management](swagger_user_managment.png)
+![Swagger User Management](docs/swagger_user_managment.png)
 
 **Create User endpoint detail:**
 
-![Swagger Create User](swagger_create_user.png)
+![Swagger Create User](docs/swagger_create_user.png)
 
 
 
