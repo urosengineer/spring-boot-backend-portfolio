@@ -85,6 +85,20 @@ Content-Type: application/json
 - `exception/` — Global and domain exception handling
 - `util/` — Utility/helper classes (PDF, Word, metadata, etc.)
 
+### API Documentation (Swagger UI Example)
+
+This project provides fully documented REST endpoints using Swagger/OpenAPI.
+Below are example screenshots from the live API documentation:
+
+**User Management endpoints overview:**
+
+![Swagger User Management](swagger_user_managment.png)
+
+**Create User endpoint detail:**
+
+![Swagger Create User](swagger_create_user.png)
+
+
 
 ## Portfolio & Contact
 
