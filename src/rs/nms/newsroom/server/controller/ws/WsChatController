@@ -21,7 +21,7 @@ import java.util.Objects;
  * 
  * Handles user presence, message delivery, and typing events in chat rooms.
  *
- * @author Urke
+ * 
  */
 @Controller
 @RequiredArgsConstructor
