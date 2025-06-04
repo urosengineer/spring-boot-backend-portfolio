@@ -51,7 +51,7 @@ Content-Type: application/json
   "role": "ADMIN",
   "user_id": 6
 }
-
+```
 
 ### Create New User
 
