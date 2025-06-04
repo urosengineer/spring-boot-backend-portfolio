@@ -59,7 +59,6 @@ public class FileStorageUtil {
             return;
         }
 
-        // filePath je relativni web path (npr. /profile-images/xxx.jpg), a nama treba fizički path
         String fileName = Paths.get(filePath).getFileName().toString();
         Path absolutePath = this.fileStorageLocation.resolve(fileName);
 
