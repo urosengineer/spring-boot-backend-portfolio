@@ -36,7 +36,7 @@ public class MosTcpServerConfig {
          .channel(NioServerSocketChannel.class)
          .childHandler(initializer)
          .option(ChannelOption.SO_BACKLOG, 128)
-         .option(ChannelOption.SO_REUSEADDR, true) // <-- Dodato!
+         .option(ChannelOption.SO_REUSEADDR, true)
          .childOption(ChannelOption.SO_KEEPALIVE, true);
 
         logger.info("Starting MOS TCP server on port {}", mosTcpPort);
@@ -46,11 +46,11 @@ public class MosTcpServerConfig {
             return serverChannel;
         } catch (InterruptedException e) {
             logger.error("Failed to start MOS TCP server", e);
-            shutdownEventLoops(true); // menja se
+            shutdownEventLoops(true);
             throw e;
         } catch (Exception e) {
             logger.error("Unexpected error while starting MOS TCP server", e);
-            shutdownEventLoops(true); // menja se
+            shutdownEventLoops(true);
             throw new RuntimeException(e);
         }
     }
@@ -68,7 +68,7 @@ public class MosTcpServerConfig {
 
     private void waitForShutdown(EventLoopGroup group) {
         try {
-            group.terminationFuture().sync(); // Blokira dok se zaista sve ne ugasi
+            group.terminationFuture().sync();
         } catch (InterruptedException e) {
             logger.warn("Interrupted while waiting for Netty EventLoop shutdown", e);
             Thread.currentThread().interrupt();
