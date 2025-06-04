@@ -107,13 +107,15 @@ Below are example screenshots from the live API documentation:
 
 
 ## Portfolio & Contact
-
-For more information, proposals, or consulting inquiries, please contact via Upwork.
+For more information, proposals, or consulting inquiries, please contact me via Upwork.
 
 ## License
-
-This project is provided as a demonstration portfolio and is not licensed for production use without consent.
+This project is provided solely as a demonstration portfolio. It is not licensed for production use without explicit consent.
 
 ## Contribution
+This is a personal portfolio project; external contributions are not being accepted at this time.
 
-Portfolio-only: not accepting external contributions at this time.
+---
+
+#java #kotlin #springboot #backend #api #microservices #automation #softwaredevelopment #devops #docker #restapi #enterprise #programming #softwareengineer #portfolio
+
