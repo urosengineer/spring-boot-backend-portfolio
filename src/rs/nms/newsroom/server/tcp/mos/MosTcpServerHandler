@@ -1,0 +1,195 @@
+package rs.nms.newsroom.server.tcp.mos;
+
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import rs.nms.newsroom.server.dto.mos.*;
+import rs.nms.newsroom.server.mos.builder.MosRoAckBuilder;
+import rs.nms.newsroom.server.mos.parser.MosXmlParser;
+import rs.nms.newsroom.server.service.MosRoMessageService;
+import rs.nms.newsroom.server.service.MosStoryMessageService;
+
+import java.util.Optional;
+
+@Slf4j
+@Component
+@ChannelHandler.Sharable
+@RequiredArgsConstructor
+public class MosTcpServerHandler extends SimpleChannelInboundHandler<String> {
+
+    private final MosRoMessageService mosRoMessageService;
+    private final MosStoryMessageService mosStoryMessageService;
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) {
+        log.info("MOS TCP received message:\n{}", msg);
+
+        if (!msg.contains("<mos>")) {
+            log.warn("Primljena poruka nije MOS XML.");
+            return;
+        }
+
+        log.info("MOS XML detektovan.");
+
+        Optional<String> roCreateBlock = MosXmlParser.extractRoCreate(msg);
+        if (roCreateBlock.isPresent()) {
+            log.info("Detektovan roCreate blok.");
+            RoCreateMessage roCreate = MosXmlParser.parseRoCreate(roCreateBlock.get());
+            log.info("Parsiran roCreate:\nRO ID: {}\nSlug: {}\nMeta: {}",
+                    roCreate.getRoID(), roCreate.getSlug(), roCreate.getMosExternalMeta());
+
+            mosRoMessageService.saveFromRoCreate(roCreate);
+
+            String ackXml = MosRoAckBuilder.build(roCreate.getRoID(), true, "roCreate received successfully");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+        Optional<String> roUpdateBlock = MosXmlParser.extractRoUpdate(msg);
+        if (roUpdateBlock.isPresent()) {
+            log.info("Detektovan roUpdate blok.");
+            RoUpdateMessage update = MosXmlParser.parseRoUpdate(roUpdateBlock.get());
+            log.info("Parsiran roUpdate:\nRO ID: {}\nNew Slug: {}\nNew Meta: {}",
+                    update.getRoID(), update.getNewSlug(), update.getNewMosExternalMeta());
+
+            mosRoMessageService.updateFromRoUpdate(update);
+
+            String ackXml = MosRoAckBuilder.build(update.getRoID(), true, "roUpdate processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+        Optional<String> roDeleteBlock = MosXmlParser.extractRoDelete(msg);
+        if (roDeleteBlock.isPresent()) {
+            log.info("Detektovan roDelete blok.");
+            RoDeleteMessage roDelete = MosXmlParser.parseRoDelete(roDeleteBlock.get());
+            log.info("Parsiran roDelete: RO ID: {}", roDelete.getRoID());
+
+            mosRoMessageService.deleteByRoId(roDelete.getRoID());
+
+            String ackXml = MosRoAckBuilder.build(roDelete.getRoID(), true, "roDelete processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+        Optional<String> roReplaceBlock = MosXmlParser.extractRoReplace(msg);
+        if (roReplaceBlock.isPresent()) {
+            log.info("Detektovan roReplace blok.");
+            RoReplaceMessage roReplace = MosXmlParser.parseRoReplace(roReplaceBlock.get());
+            log.info("Parsiran roReplace:\nRO ID: {}\nSlug: {}\nMeta: {}",
+                    roReplace.getRoID(), roReplace.getSlug(), roReplace.getMosExternalMeta());
+
+            mosRoMessageService.replaceFromRoReplace(roReplace);
+
+            String ackXml = MosRoAckBuilder.build(roReplace.getRoID(), true, "roReplace processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+        Optional<String> roStoryInsertBlock = MosXmlParser.extractRoStoryInsert(msg);
+        if (roStoryInsertBlock.isPresent()) {
+            log.info("Detektovan roStoryInsert blok.");
+            RoStoryInsertMessage insert = MosXmlParser.parseRoStoryInsert(roStoryInsertBlock.get());
+            log.info("Parsiran roStoryInsert:\nRO ID: {}\nStory ID: {}\nSlug: {}",
+                    insert.getRoID(), insert.getStoryID(), insert.getStorySlug());
+
+            mosStoryMessageService.processRoStoryInsert(insert);
+
+            String ackXml = MosRoAckBuilder.build(insert.getRoID(), true, "roStoryInsert processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+        Optional<String> roStoryReplaceBlock = MosXmlParser.extractRoStoryReplace(msg);
+        if (roStoryReplaceBlock.isPresent()) {
+            log.info("Detektovan roStoryReplace blok.");
+            RoStoryReplaceMessage replace = MosXmlParser.parseRoStoryReplace(roStoryReplaceBlock.get());
+            log.info("Parsiran roStoryReplace:\nRO ID: {}\nStory ID: {}\nSlug: {}",
+                    replace.getRoID(), replace.getStoryID(), replace.getStorySlug());
+
+            mosStoryMessageService.processRoStoryReplace(replace);
+
+            String ackXml = MosRoAckBuilder.build(replace.getRoID(), true, "roStoryReplace processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+        Optional<String> roStoryDeleteBlock = MosXmlParser.extractRoStoryDelete(msg);
+        if (roStoryDeleteBlock.isPresent()) {
+            log.info("Detektovan roStoryDelete blok.");
+            RoStoryDeleteMessage delete = MosXmlParser.parseRoStoryDelete(roStoryDeleteBlock.get());
+            log.info("Parsiran roStoryDelete:\nRO ID: {}\nStory ID: {}",
+                    delete.getRoID(), delete.getStoryID());
+
+            mosStoryMessageService.processRoStoryDelete(delete);
+
+            String ackXml = MosRoAckBuilder.build(delete.getRoID(), true, "roStoryDelete processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+        
+        Optional<String> roStoryMoveBlock = MosXmlParser.extractRoStoryMove(msg);
+        if (roStoryMoveBlock.isPresent()) {
+            log.info("Detektovan roStoryMove blok.");
+            RoStoryMoveMessage move = MosXmlParser.parseRoStoryMove(roStoryMoveBlock.get());
+            log.info("Parsiran roStoryMove:\nRO ID: {}\nStory ID: {}\nBefore: {}\nAfter: {}",
+                    move.getRoID(), move.getStoryID(), move.getStoryIDBefore(), move.getStoryIDAfter());
+
+            mosStoryMessageService.processRoStoryMove(move);
+
+            String ackXml = MosRoAckBuilder.build(move.getRoID(), true, "roStoryMove processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+        
+        Optional<String> roStorySwapBlock = MosXmlParser.extractRoStorySwap(msg);
+        if (roStorySwapBlock.isPresent()) {
+            log.info("Detektovan roStorySwap blok.");
+            RoStorySwapMessage swap = MosXmlParser.parseRoStorySwap(roStorySwapBlock.get());
+            log.info("Parsiran roStorySwap:\nRO ID: {}\nStory1: {}\nStory2: {}",
+                    swap.getRoID(), swap.getStoryID1(), swap.getStoryID2());
+
+            mosStoryMessageService.processRoStorySwap(swap);
+
+            String ackXml = MosRoAckBuilder.build(swap.getRoID(), true, "roStorySwap processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+        
+        Optional<String> roStoryStatusBlock = MosXmlParser.extractRoStoryStatus(msg);
+        if (roStoryStatusBlock.isPresent()) {
+            log.info("Detektovan roStoryStatus blok.");
+            RoStoryStatusMessage statusMsg = MosXmlParser.parseRoStoryStatus(roStoryStatusBlock.get());
+            log.info("Parsiran roStoryStatus: RO ID: {}, Story ID: {}, Status: {}", 
+                     statusMsg.getRoID(), statusMsg.getStoryID(), statusMsg.getStatus());
+
+            mosStoryMessageService.processRoStoryStatus(statusMsg);
+
+            String ackXml = MosRoAckBuilder.build(statusMsg.getRoID(), true, "roStoryStatus processed");
+            ctx.writeAndFlush(ackXml + "\r\n");
+            return;
+        }
+
+
+        log.warn("Nepodržana ili neprepoznata MOS poruka.");
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        log.error("MOS TCP server error", cause);
+        ctx.close();
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) {
+        log.info("MOS TCP klijent povezan: {}", ctx.channel().remoteAddress());
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        log.info("MOS TCP klijent prekinuo vezu: {}", ctx.channel().remoteAddress());
+    }
+}
