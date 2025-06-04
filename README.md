@@ -2,6 +2,8 @@
 
 This codebase is curated and maintained by Urke, a backend engineer specializing in enterprise Java/Spring Boot solutions. It demonstrates best practices in modern backend architecture, API design, and production-quality engineering.
 
+This repository demonstrates an extensible, production-grade backend platform tailored for newsrooms, broadcast, and automation use cases. It showcases how to architect, document, and secure a modern Java backend following best enterprise practices.
+
 ## Features
 
 - REST API with Swagger/OpenAPI documentation
@@ -104,3 +106,10 @@ Below are example screenshots from the live API documentation:
 
 For more information, proposals, or consulting inquiries, please contact via Upwork.
 
+## License
+
+This project is provided as a demonstration portfolio and is not licensed for production use without consent.
+
+## Contribution
+
+Portfolio-only: not accepting external contributions at this time.
