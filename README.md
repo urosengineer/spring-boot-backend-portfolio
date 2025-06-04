@@ -25,7 +25,7 @@ This codebase is curated and maintained by Urke, a backend engineer specializing
 
 1. Configure database in `application.properties`
 2. Run: `./gradlew bootRun`
-3. API docs: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+3. API docs: [[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html](https://localhost:8443/api/swagger-ui/index.html#/))
 
 ## Example API Usage
 
