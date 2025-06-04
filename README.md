@@ -71,6 +71,21 @@ Content-Type: application/json
 
 ```
 
+## Project Structure
+
+- `NmsServerApplication` — Spring Boot entrypoint, app lifecycle hooks
+- `config/` — Security, WebSocket, storage, Swagger, CORS, persistence and all application configuration
+- `controller/` — REST and WebSocket controllers (users, stories, rundown, chat, media, MOS integration, etc.)
+- `domain/` — JPA entities and enums (User, Story, StoryItem, Rundown, etc.)
+- `dto/` — DTOs for requests, responses, filtering, search
+- `repository/` — Spring Data repositories for all main entities
+- `service/` — Core business logic and feature orchestration (including helpers)
+- `tcp/` — Netty TCP server and MOS protocol handlers
+- `websocket/` — WebSocket events, session listeners, presence tracking
+- `exception/` — Global and domain exception handling
+- `util/` — Utility/helper classes (PDF, Word, metadata, etc.)
+
+
 ## Portfolio & Contact
 
 For more information, proposals, or consulting inquiries, please contact via Upwork.
