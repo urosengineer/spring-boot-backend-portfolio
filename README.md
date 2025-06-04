@@ -82,7 +82,7 @@ Content-Type: application/json
 - `NmsServerApplication` — Spring Boot entrypoint, app lifecycle hooks
 - `config/` — Security, WebSocket, storage, Swagger, CORS, persistence and all application configuration
 - `controller/` — REST and WebSocket controllers (users, stories, rundown, chat, media, MOS integration, etc.)
-- `domain/` — JPA entities and enums (User, Story, StoryItem, Rundown, etc.)
+- `domain/` — JPA entities and enums (50+ normalized tables covering all newsroom features, including audit and activity logs)
 - `dto/` — DTOs for requests, responses, filtering, search
 - `repository/` — Spring Data repositories for all main entities
 - `service/` — Core business logic and feature orchestration (including helpers)
