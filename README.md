@@ -28,6 +28,11 @@ This repository demonstrates an extensible, production-grade backend platform ta
 1. Configure database in `application.properties`
 2. Run: `./gradlew bootRun`
 
+## API Documentation
+
+All endpoints are fully documented using Swagger/OpenAPI (see project screenshots).
+
+
 ## Example API Usage
 
 ### User Authentication (Login)
