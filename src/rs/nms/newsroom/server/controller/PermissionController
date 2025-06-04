@@ -16,7 +16,7 @@ import java.util.List;
 	 description = "Administration of permissions, including creation, retrieval, update, and deletion. All operations are strictly limited to ADMIN users."
 )
 @RestController
-@RequestMapping("/api/permissions")
+@RequestMapping("/permissions")
 @RequiredArgsConstructor
 public class PermissionController {
 
