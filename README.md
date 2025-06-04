@@ -27,7 +27,6 @@ This repository demonstrates an extensible, production-grade backend platform ta
 
 1. Configure database in `application.properties`
 2. Run: `./gradlew bootRun`
-3. API docs: [https://localhost:8443/api/swagger-ui/index.html#/](https://localhost:8443/api/swagger-ui/index.html#/)
 
 ## Example API Usage
 
