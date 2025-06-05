@@ -25,8 +25,17 @@ This repository demonstrates an extensible, production-grade backend platform ta
 
 ## How to Run
 
-1. Configure database in `application.properties`
-2. Run: `./gradlew bootRun`
+### Local (development)
+
+1. Configure your database in `src/main/resources/application.yaml`
+2. Run: `./gradlew bootRun` or `mvn spring-boot:run`
+
+### Dockerized
+
+1. Build and run containers:
+   ```bash
+   docker-compose up --build
+   ```
 
 ## API Documentation
 
@@ -107,7 +116,8 @@ Below are example screenshots from the live API documentation:
 
 
 ## Portfolio & Contact
-For more information, proposals, or consulting inquiries, please contact me via Upwork.
+
+For proposals or consulting inquiries, contact me via [Upwork](https://www.upwork.com/freelancers/~01fec0932cf5314b14).
 
 ## License
 This project is provided solely as a demonstration portfolio. It is not licensed for production use without explicit consent.
