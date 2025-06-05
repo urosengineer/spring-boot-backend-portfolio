@@ -114,8 +114,3 @@ This project is provided solely as a demonstration portfolio. It is not licensed
 
 ## Contribution
 This is a personal portfolio project; external contributions are not being accepted at this time.
-
----
-
-#java #kotlin #springboot #backend #api #microservices #automation #softwaredevelopment #devops #docker #restapi #enterprise #programming #softwareengineer #portfolio
-
