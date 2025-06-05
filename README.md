@@ -16,7 +16,7 @@ This repository demonstrates an extensible, production-grade backend platform ta
 
 ## Technologies
 
-- Java 17+
+- Java 21+
 - Spring Boot, Spring Security, Spring Data JPA
 - Netty (TCP server)
 - STOMP/WebSocket
