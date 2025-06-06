@@ -25,6 +25,7 @@ This repository demonstrates an extensible, production-grade backend platform ta
 - MariaDB/MySQL
 - Maven (build tool)  
   > *Docker support is available in the full, private repository.*
+-
   > *The full codebase can be adapted for Gradle builds upon request.*
 
 ---
