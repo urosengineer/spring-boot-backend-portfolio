@@ -124,7 +124,8 @@ Below are example screenshots from the live API documentation:
 For proposals or consulting inquiries, contact me via [Upwork](https://www.upwork.com/freelancers/~01fec0932cf5314b14).
 
 ## License
-This project is provided solely as a demonstration portfolio. It is not licensed for production use without explicit consent.
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Contribution
 This is a personal portfolio project; external contributions are not being accepted at this time.
