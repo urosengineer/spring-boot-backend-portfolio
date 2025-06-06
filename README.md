@@ -4,6 +4,8 @@ This codebase is curated and maintained by Uros, a backend engineer specializing
 
 This repository demonstrates an extensible, production-grade backend platform tailored for newsrooms, broadcast, and automation use cases. It showcases how to architect, document, and secure a modern Java backend following best enterprise practices.
 
+---
+
 ## Features
 
 - REST API with Swagger/OpenAPI documentation
@@ -21,21 +23,21 @@ This repository demonstrates an extensible, production-grade backend platform ta
 - Netty (TCP server)
 - STOMP/WebSocket
 - MariaDB/MySQL
-- Gradle/Maven
+- Maven (build tool)  
+  > *Gradle and Docker support is available in the full, private repository.*
 
-## How to Run
+---
 
-### Local (development)
+## ⚠️ Portfolio Notice
 
-1. Configure your database in `src/main/resources/application.yaml`
-2. Run: `./gradlew bootRun` or `mvn spring-boot:run`
+**This repository contains only a subset of the codebase, published for portfolio and code review purposes.**  
+It is not a complete, runnable application and is not intended for deployment.
 
-### Dockerized
+- Only key modules, representative controllers, entities, DTOs, and configuration are included.
+- Full business logic, all features, and proprietary integrations remain private.
+- **Build and run instructions are intentionally omitted** — the project is not meant to be built or executed in this form.
 
-1. Build and run containers:
-   ```bash
-   docker-compose up --build
-   ```
+---
 
 ## API Documentation
 
