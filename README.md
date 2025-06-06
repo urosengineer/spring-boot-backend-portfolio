@@ -24,7 +24,8 @@ This repository demonstrates an extensible, production-grade backend platform ta
 - STOMP/WebSocket
 - MariaDB/MySQL
 - Maven (build tool)  
-  > *Gradle and Docker support is available in the full, private repository.*
+  > *Docker support is available in the full, private repository.*
+  > *The full codebase can be adapted for Gradle builds upon request.*
 
 ---
 
