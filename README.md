@@ -200,6 +200,10 @@ These cover the main services and business logic relevant for newsroom automatio
 For technical consultation, code review, or backend contract work,  
 contact via [Upwork](https://www.upwork.com/freelancers/~01fec0932cf5314b14) or [LinkedIn](https://www.linkedin.com/in/uros-ilic-6a201436a/).
 
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
 ## Contribution
 
 This repository serves as a curated professional portfolio.  
