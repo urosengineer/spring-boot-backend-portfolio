@@ -15,8 +15,8 @@ This repository demonstrates an extensible, production-grade backend platform ta
 - 🚀 **Modular, domain-driven design**
 - 📁 **Advanced file & media storage management**
 - 🔌 **Integration:** MOS TCP server (Netty), automation protocols
-- 📝 **Audit logging, user management, multi-tenancy**
-- 📝 **Server-side Word/PDF export** for rundowns, stories, and scripts
+- 🗂️ **Audit logging, user management, multi-tenancy**
+- 📄 **Server-side Word/PDF export** for rundowns, stories, and scripts
 
 ## Technologies
 
@@ -194,6 +194,21 @@ LICENSE
 
 Representative unit and integration tests (JUnit 5, Spring Boot Test) are provided in `src/test/java/`.  
 These cover the main services and business logic relevant for newsroom automation and backend best practices.
+
+## Observability & Monitoring
+
+This project follows enterprise best practices in observability and operational monitoring:
+
+- **Micrometer metrics** are integrated, exposing key JVM and application metrics via Spring Boot Actuator endpoints.
+- **Grafana dashboards** are used to visualize JVM memory, GC activity, CPU usage, thread states, log events, HTTP metrics, and other application insights in real time.
+
+A sample Grafana dashboard (JVM/Micrometer):
+
+[![JVM Grafana Dashboard](docs/jvm_dashboard.png)](http://localhost:3000/d/517290dc-ae1b-4c72-9ea6-d9c70f44f6ca/jvm-micrometer?orgId=1&from=now-24h&to=now&refresh=30s)
+
+> **Note:**  
+> Some panels display "No data" as this screenshot is from a development environment with limited workloads and integrations enabled.  
+> Full observability, alerting, and production monitoring scripts (including advanced metrics and alerting) are available in the private repository and upon request for qualified clients.
 
 ## Portfolio & Contact
 
